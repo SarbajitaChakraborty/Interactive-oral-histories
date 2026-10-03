@@ -1,0 +1,236 @@
+:root {
+    --bg-primary: #f4f6f9;
+    --bg-card: #ffffff;
+    --text-main: #2d3748;
+    --text-muted: #718096;
+    --accent: #3182ce;
+    --accent-light: #ebf8ff;
+    --success: #38a169;
+    --highlight-theme1: #f6ad55;
+    --highlight-theme2: #63b3ed;
+    --border-color: #e2e8f0;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a202c;
+    --bg-card: #2d3748;
+    --text-main: #f7fafc;
+    --text-muted: #a0aec0;
+    --accent: #63b3ed;
+    --accent-light: #2b6cb0;
+    --border-color: #4a5568;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-card);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.badge {
+    background-color: var(--accent-light);
+    color: var(--accent);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    min-height: calc(100vh - 70px);
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.sidebar {
+    background-color: var(--bg-card);
+    padding: 2rem;
+    border-right: 1px solid var(--border-color);
+}
+
+.sidebar h2 {
+    font-size: 1.2rem;
+    margin-top: 0;
+}
+
+.project-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.control-group {
+    margin-top: 2rem;
+}
+
+.control-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+.primary-btn {
+    background-color: var(--accent);
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    transition: opacity 0.2s;
+}
+
+.primary-btn:hover {
+    opacity: 0.9;
+}
+
+.main-content {
+    padding: 2rem;
+    background-color: var(--bg-primary);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.metric-card {
+    background-color: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.metric-card h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.status-indicator {
+    color: var(--success);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.performance-metric {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+}
+
+.metric-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0.5rem 0 0 0;
+}
+
+.content-card {
+    background-color: var(--bg-card);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.content-card h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+}
+
+.card-subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tab-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--text-main);
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    background-color: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+}
+
+.transcript-box {
+    background-color: var(--bg-primary);
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.transcript-line {
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    gap: 1rem;
+}
+
+.timestamp {
+    color: var(--accent);
+    font-family: monospace;
+    font-weight: bold;
+    min-width: 80px;
+}
+
+.highlight-theme1 {
+    background-color: #feebc8;
+    border-left: 4px solid var(--highlight-theme1);
+    color: #7b341e;
+}
+
+.highlight-theme2 {
+    background-color: #ebf8ff;
+    border-left: 4px solid var(--highlight-theme2);
+    color: #2b6cb0;
+}
+
+.dimmed {
+    opacity: 0.3;
+}

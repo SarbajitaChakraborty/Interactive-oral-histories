@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Multimedia Oral History Storytelling & Analytics Portfolio</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+
+        <header class="navbar">
+            <div class="logo">Multimedia Portfolio</div>
+            <nav>
+                <span class="badge">Tech Stack: <HTML:5>|<CSS3>|<JS ES6+></span>
+            </nav>
+        </header>
+        <main class="dashboard-container">
+            <!-- Sidebar Controls -->
+            <aside class="sidebar">
+                <h2>Dashboard Control</h2>
+                <p class="project-desc">This interactive environment showcases web optimization data, motion graphic rendering metrics, and qualitative transcript coding simulation.</p>
+
+                <div class="control-group">
+                    <label for="fps-range">Simulate Animation FPS: <span id="fps-val">60</span></label>
+                    <input type="range" id="fps-range" min="15" max="120" value="60">
+                </div>
+
+                <div class="control-group">
+                    <button id="theme-btn" class="primary-btn">Toggle Interface Theme</button>
+                </div>
+            </aside>
+
+                <!--Main Workspace-->
+                <section class="main-content">
+                                                    <!--Row 1: Metrics-->
+                                                    <div class="metrics-grid">
+                                                        <div class="metric-card">
+                                                            <h3>Lottie Animation Status</h3>
+                                                            <div class="status-indicator active">Vector Render Engine Active</div>
+                                                            <p class="metric-desc">Asset playback via JSON vectors</p>
+                                                        </div>
+                                                        <div class="metric-card">
+                                                            <h3>DOM Rendering Performance</h3>
+                                                            <div class="performance-metric" id="perf-metric">60 FPS</div>
+                                                            <p class="metric-desc">Hardware-accelerated web animation</p>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!--Row 2: Interactive Transcript Coding Module-->
+                                                    <div class="content-card">
+                                                        <h2>Qualitative Data Viewer & Coding Interface</h2>
+                                                        <p class="card-subtitle">Simulating Atlas.ti transcript structures with active thematic highlighting.</p>
+
+                                                        <div class="filter-tabs">
+                                                            <button class="tab-btn active" data-filter="all">All Text</button>
+                                                            <button class="tab-btn" data-filter="theme1">Theme: Integration</button>
+                                                            <button class="tab-btn" data-filter="theme2">Theme: Journey</button>
+                                                        </div>
+                                                                                                                    
+                                                        <div class="transcript-box">
+                                                            <P class="transcript-line" data-theme="theme2">
+                                                                <span class="timestamp">[00:04:12]</span>
+                                                                <span class="segment">"Our neighbourhood hosted community storytelling circles every summer, recording the memories of families who settled here in the 1950's."</span>
+
+                                                            </P>
+                                                            <p class="transcript-line" data-theme="theme1">
+                                                                <span class="timestamp">[00:11:34]</span>
+                                                                <span class="segment">"Preserving these audio archives digitally enures that local cultural traditions and dialets are not lost to time."</span>
+                                                            </p>
+                                                            <p class="transcript-line" data-theme="theme2">
+                                                                <span class="timestamp">[00:22:15]</span>
+                                                                <span class="segment">"We collected over forty seperate interviews, focusing entirely on how urban shifts change family lifestyle over generations."</span>
+                                                            </p>
+                                                        </div>                                                           
+                                                    </div>
+                 </section>
+        </main>
+
+        <script src="app.js"></script>
+    </body>
+</html>
