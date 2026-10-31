@@ -42,24 +42,24 @@
             padding: 20px;
             display: flex;
             justify-content: center;
+            min-height: 100vh;
         }
 
-        .container {
-            width: 100%;
-            max-width: 800px;
-        }
+        .container { width: 100%; max-width: 800px; }
 
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
             margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 2px solid var(--border);
         }
 
         h1 { font-size: 1.4rem; font-weight: 700; }
-        
+
         .tech-stack {
             font-size: 0.8rem;
             color: var(--text-secondary);
@@ -93,12 +93,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .player-layout {
             display: flex;
             align-items: center;
             gap: 15px;
+            flex-wrap: wrap;
         }
 
         .play-btn {
@@ -110,10 +113,12 @@
             font-weight: 600;
             cursor: pointer;
             font-size: 0.9rem;
+            min-width: 120px;
         }
 
         .timeline-slider {
             flex-grow: 1;
+            min-width: 150px;
             height: 6px;
             accent-color: var(--accent);
             cursor: pointer;
@@ -129,6 +134,7 @@
             display: flex;
             gap: 8px;
             margin-bottom: 15px;
+            flex-wrap: wrap;
         }
 
         .filter-tag {
@@ -161,6 +167,11 @@
             font-size: 0.9rem;
             line-height: 1.5;
             border-left: 4px solid var(--border);
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .transcript-row.current {
+            border-left-color: var(--accent);
         }
 
         .timestamp {
@@ -198,6 +209,28 @@
             background-color: #10b981;
             margin-right: 6px;
         }
+
+        .anim-track {
+            position: relative;
+            height: 28px;
+            margin: 12px 0;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .anim-dot {
+            position: absolute;
+            top: 4px;
+            left: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+
+        .range-full { width: 100%; accent-color: var(--accent); }
     </style>
 </head>
 <body>
@@ -206,9 +239,9 @@
     <header>
         <div>
             <h1>Multimedia Oral History Storytelling Portfolio</h1>
-            <div class="tech-stack">Tech Stack: HTML5 Audio | CSS3 | JS ES6+ | Lottie Rendering</div>
+            <div class="tech-stack">Tech Stack: HTML5 | CSS3 | JavaScript ES6+ | Qualitative Coding (ATLAS.ti)</div>
         </div>
-        <button class="theme-btn" onclick="toggleTheme()">Toggle Theme</button>
+        <button class="theme-btn" id="themeBtn" type="button">Toggle Theme</button>
     </header>
 
     <!-- Audio Player Dashboard Component -->
@@ -218,84 +251,165 @@
             <span class="time-display" id="timeDisplay">00:00 / 00:30</span>
         </div>
         <div class="player-layout">
-            <button class="play-btn" id="playBtn" onclick="toggleAudio()">Play Audio</button>
-            <input type="range" class="timeline-slider" id="timeline" min="0" max="30" value="0" oninput="updateTimelineTime()">
+            <button class="play-btn" id="playBtn" type="button">Play Audio</button>
+            <input type="range" class="timeline-slider" id="timeline" min="0" max="30" value="0" aria-label="Timeline position">
         </div>
     </div>
 
-    <!-- Active Analytics Coding Framework -->
+    <!-- Transcript Coding Framework -->
     <div class="card">
         <div class="card-title">Transcript Coding Framework (ATLAS.ti Simulation)</div>
         <div class="filter-bar">
-            <button class="filter-tag active" id="btn-all" onclick="filterTheme('all')">All Material</button>
-            <button class="filter-tag" id="btn-journey" onclick="filterTheme('journey')">Theme: Journey</button>
-            <button class="filter-tag" id="btn-integration" onclick="filterTheme('integration')">Theme: Integration</button>
+            <button class="filter-tag active" id="btn-all" type="button" data-filter="all">All Material</button>
+            <button class="filter-tag" id="btn-journey" type="button" data-filter="journey">Theme: Journey</button>
+            <button class="filter-tag" id="btn-integration" type="button" data-filter="integration">Theme: Integration</button>
         </div>
         <div class="transcript-box">
-            <div class="transcript-row" id="row-1" data-theme="journey">
+            <div class="transcript-row" id="row-1" data-theme="journey" data-start="4">
                 <span class="timestamp">[00:00:04]</span>
-                <mark class="journey">"Our family packed everything into three bags</mark> when we left the transition center, mapping out a direct route across borders before arriving in Manitoba."
+                "<mark class="journey">Our family packed everything into three bags</mark> when we left the transition center, mapping out a direct route across borders before arriving in Manitoba."
             </div>
-            <div class="transcript-row" id="row-2" data-theme="integration">
+            <div class="transcript-row" id="row-2" data-theme="integration" data-start="11">
                 <span class="timestamp">[00:00:11]</span>
                 "When we finally connected with local community centers, <mark class="integration">enrolling the kids in school and accessing language programs</mark> made it feel like home."
             </div>
-            <div class="transcript-row" id="row-3" data-theme="journey">
+            <div class="transcript-row" id="row-3" data-theme="journey" data-start="22">
                 <span class="timestamp">[00:00:22]</span>
-                <mark class="journey">"The relocation journey spanned three separate flights</mark>, each introducing a massive shift in climate and atmosphere."
+                "<mark class="journey">The relocation journey spanned three separate flights</mark>, each introducing a massive shift in climate and atmosphere."
             </div>
         </div>
     </div>
 
-    <!-- Micro-Animation Optimization Monitor -->
+    <!-- Animation Frame-Rate Monitor -->
     <div class="card">
         <div class="card-title">
-            <span>Lottie Vector Rendering Monitor</span>
+            <span>Animation Frame-Rate Monitor</span>
             <span style="font-size: 0.8rem; color: var(--text-secondary);"><span class="status-pill"></span>Live Engine</span>
         </div>
         <div class="metric-row">
             <span>Render Profile:</span>
-            <strong>Hardware-Accelerated Vectors</strong>
+            <strong>Throttled requestAnimationFrame</strong>
         </div>
         <div class="metric-row">
-            <span>Target Playback Monitor:</span>
+            <span>Target Playback:</span>
             <strong id="fpsLabel">60 FPS</strong>
         </div>
-        <input type="range" style="width:100%; accent-color:var(--accent);" min="15" max="60" value="60" step="15" oninput="document.getElementById('fpsLabel').innerText = this.value + ' FPS'">
+        <div class="anim-track"><div class="anim-dot" id="animDot"></div></div>
+        <input type="range" class="range-full" id="fpsSlider" min="15" max="60" value="60" step="15" aria-label="Target frames per second">
     </div>
 </div>
 
 <script>
-    // Native, highly compatible scripts
-    function toggleTheme() {
+    (function () {
+        var TOTAL = 30;
+
+        // ---------- Theme ----------
         var root = document.documentElement;
-        var theme = root.getAttribute('data-theme');
-        root.setAttribute('data-theme', theme === 'dark' ? 'light' : 'dark');
-    }
+        try {
+            var saved = localStorage.getItem('theme');
+            if (saved) root.setAttribute('data-theme', saved);
+        } catch (e) {}
 
-    var isPlaying = false;
-    var timer = null;
+        document.getElementById('themeBtn').addEventListener('click', function () {
+            var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            root.setAttribute('data-theme', next);
+            try { localStorage.setItem('theme', next); } catch (e) {}
+        });
 
-    function toggleAudio() {
-        var btn = document.getElementById('playBtn');
+        // ---------- Timeline / simulated audio ----------
+        var playBtn = document.getElementById('playBtn');
         var slider = document.getElementById('timeline');
         var display = document.getElementById('timeDisplay');
+        var rows = document.querySelectorAll('.transcript-row');
+        var isPlaying = false;
+        var timer = null;
 
-        if (isPlaying) {
+        function pad(n) { return (n < 10 ? '0' : '') + n; }
+        function fmt(s) { return pad(Math.floor(s / 60)) + ':' + pad(s % 60); }
+
+        function render() {
+            var val = parseInt(slider.value, 10);
+            display.textContent = fmt(val) + ' / ' + fmt(TOTAL);
+
+            // Highlight the transcript row that matches the current time
+            var current = null;
+            rows.forEach(function (row) {
+                row.classList.remove('current');
+                if (val >= parseInt(row.getAttribute('data-start'), 10)) current = row;
+            });
+            if (current) current.classList.add('current');
+        }
+
+        function stop() {
             clearInterval(timer);
-            btn.innerText = 'Play Audio';
+            timer = null;
             isPlaying = false;
-        } else {
-            btn.innerText = 'Pause Audio';
+            playBtn.textContent = 'Play Audio';
+        }
+
+        function start() {
+            if (parseInt(slider.value, 10) >= TOTAL) slider.value = 0;
             isPlaying = true;
-            timer = setInterval(function() {
-                var val = parseInt(slider.value);
-                if (val >= 30) {
-                    clearInterval(timer);
+            playBtn.textContent = 'Pause Audio';
+            timer = setInterval(function () {
+                var val = parseInt(slider.value, 10);
+                if (val >= TOTAL) {
+                    stop();
                     slider.value = 0;
-                    btn.innerText = 'Play Audio';
-                    isPlaying = false;
-                    display.innerText = '00:00 / 00:30';
                 } else {
                     slider.value = val + 1;
-                    </html>
+                }
+                render();
+            }, 1000);
+        }
+
+        playBtn.addEventListener('click', function () {
+            if (isPlaying) stop(); else start();
+        });
+        slider.addEventListener('input', render);
+        render();
+
+        // ---------- Theme filter ----------
+        var filterBtns = document.querySelectorAll('.filter-tag');
+        filterBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var theme = btn.getAttribute('data-filter');
+                rows.forEach(function (row) {
+                    row.style.display = (theme === 'all' || row.getAttribute('data-theme') === theme) ? '' : 'none';
+                });
+                filterBtns.forEach(function (b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+            });
+        });
+
+        // ---------- FPS monitor animation ----------
+        var fpsSlider = document.getElementById('fpsSlider');
+        var fpsLabel = document.getElementById('fpsLabel');
+        var dot = document.getElementById('animDot');
+        var targetFps = 60;
+        var lastFrame = 0;
+        var pos = 0;
+        var dir = 1;
+
+        fpsSlider.addEventListener('input', function () {
+            targetFps = parseInt(fpsSlider.value, 10);
+            fpsLabel.textContent = targetFps + ' FPS';
+        });
+
+        function frame(now) {
+            if (now - lastFrame >= 1000 / targetFps) {
+                lastFrame = now;
+                var track = dot.parentElement.clientWidth - dot.clientWidth - 4;
+                pos += dir * (track / 90);
+                if (pos >= track) { pos = track; dir = -1; }
+                if (pos <= 0) { pos = 0; dir = 1; }
+                dot.style.transform = 'translateX(' + pos + 'px)';
+            }
+            requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+    })();
+</script>
+
+</body>
+</html>
