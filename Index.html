@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimedia Oral History Storytelling & Analytics Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --border: #e2e8f0;
+            --theme-tag: #e2e8f0;
+            --theme-tag-text: #334155;
+            --highlight-journey: rgba(245, 158, 11, 0.2);
+            --highlight-journey-border: #f59e0b;
+            --highlight-integration: rgba(16, 185, 129, 0.2);
+            --highlight-integration-border: #10b981;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #3b82f6;
+            --accent-hover: #60a5fa;
+            --border: #334155;
+            --theme-tag: #334155;
+            --theme-tag-text: #e2e8f0;
+            --highlight-journey: rgba(245, 158, 11, 0.35);
+            --highlight-integration: rgba(16, 185, 129, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .tech-stack {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .theme-btn {
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .theme-btn:hover {
+            border-color: var(--accent);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .full-width {
+                grid-column: span 2;
+            }
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Audio Simulation styling */
+        .audio-player {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .play-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .play-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .timeline-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .timeline-slider {
+            width: 100%;
+            -webkit-appearance: none;
+            background: var(--border);
+            height: 6px;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .timeline-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+        }
+
+        .time-display {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Analytics / Metric Controls */
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .metric-value {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .fps-slider {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        /* Qualitative Data Section */
+        .filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tag {
+            background-color: var(--theme-tag);
+            color: var(--theme-tag-text);
+            border: 1px solid transparent;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .filter-tag.active[data-theme-filter="all"] { border-color: var(--text-primary); }
+        .filter-tag.active[data-theme-filter="journey"] { background-color: var(--highlight-journey-border); color: white; }
+        .filter-tag.active[data-theme-filter="integration"] { background-color: var(--highlight-integration-border); color: white; }
+
+        .transcript-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 250px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .transcript-row {
+            padding: 0.75rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--border);
+            background-color: var(--bg-primary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .timestamp {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 0.8rem;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        mark.journey {
+            background-color: var(--highlight-journey);
+            border-bottom: 2px solid var(--highlight-journey-border);
+            color: inherit;
+        }
+
+        mark.integration {
+            background-color: var(--highlight-integration);
+            border-bottom: 2px solid var(--highlight-integration-border);
+            color: inherit;
+        }
+
+        .status-pill {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #10b981;
+            margin-right: 0.5rem;
+        }
+
+        .pulse {
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1>Multimedia Oral History Storytelling & Analytics Portfolio</h1>
+            <div class="tech-stack">Tech Stack: HTML5 Audio | CSS3 | JS ES6+ | LottieFiles Rendering</div>
+        </div>
+        <button class="theme-btn" id="themeToggle">Toggle Interface Theme</button>
+    </header>
+
+    <div class="grid">
+        <!-- Audio Simulation Widget -->
+        <div class="card full-width">
+            <div class="card-title">
+                <span>Interactive Timeline Simulation</span>
+                <span class="time-display" id="timeDisplay">00:00 / 00:30</span>
+            </div>
+            <div class="audio-player">
+                <div class="player-controls">
+                    <button class="play-btn" id="playBtn">Play Audio</button>
+                    <div class="timeline-container">
+                        <input type="range" class="timeline-slider" id="timeline" min="0" max="30" value="0">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lottie Animation Metric Dashboard -->
+        <div class="card">
+            <div class="card-title">
+                <span>Lottie Vector Monitor</span>
+                <span style="font-size: 0.8rem; color: var(--text-secondary);"><span class="status-pill pulse"></span>Active</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Render Profile</span>
+                <span class="metric-value">Hardware-Accelerated</span>
+            </div>
+            <div class="metric-row">
+                <span class="metric-label">Target Frame Rate</span>
+                <span class="metric-value" id="fpsValue">60 FPS</span>
+            </div>
